@@ -25,12 +25,13 @@ then
 fi
 
 printf '%-50s' "** Download template configuration file"
-{
-  curl -so /tmp/config.sed https://raw.githubusercontent.com/owlh/wazuhenrichment/master/config.sedd &> /dev/null
-} || {
+response=$( curl --write-out "%{http_code}\n" -so /tmp/config.sed "https://raw.githubusercontent.com/owlh/wazuhenrichment/master/config.sed")
+if [[ ! $response == 200 ]] 
+then
   printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
+  echo "Error downloading template -> $response"
   exit 1
-}
+fi
 printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
 
 printf '%-50s' "** checking if 01-wazuh.conf file is in place"
