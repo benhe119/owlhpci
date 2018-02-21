@@ -24,6 +24,15 @@ then
     exit 1
 fi
 
+printf '%-50s' "** checking if 01-wazuh.conf file is in place"
+if [ ! -f /etc/logstash/conf.d/01-wazuh.conf ]; then
+    printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
+    echo ">> Wazuh Logstash config file is not here!"
+    echo ">> please, are you running logstash with wazuh config in this system"
+    exit 1
+fi
+printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
+
 printf '%-50s' "** Download template configuration file"
 response=$( curl --write-out "%{http_code}\n" -so /tmp/config.sed "https://raw.githubusercontent.com/owlh/wazuhenrichment/master/config.sed")
 if [[ ! $response == 200 ]] 
@@ -41,15 +50,6 @@ then
   printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
   echo "Error downloading PCI-DSS mapping-> $response"
   exit 1
-fi
-printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
-
-printf '%-50s' "** checking if 01-wazuh.conf file is in place"
-if [ ! -f /etc/logstash/conf.d/01-wazuh.conf ]; then
-    printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
-    echo ">> Wazuh Logstash config file is not here!"
-    echo ">> please, are you running logstash with wazuh config in this system"
-    exit 1
 fi
 printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
 
