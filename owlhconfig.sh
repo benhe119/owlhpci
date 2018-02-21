@@ -85,7 +85,7 @@ printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
 
 printf '%-50s' "** configuring 01-wazuh.conf"
 {
-  sed -i -f config.sed /etc/logstash/conf.d/01-wazuh.conf &> /dev/null
+  sed -i -f /tmp/config.sed /etc/logstash/conf.d/01-wazuh.conf &> /dev/null
 } || {
   printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
   exit 1
