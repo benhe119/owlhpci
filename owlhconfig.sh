@@ -100,3 +100,14 @@ printf '%-50s' "** restarting logstash"
   exit 1
 }
 printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
+
+printf '%-50s' "** Cleaning tmp files"
+{
+  rm /tmp/owlhconfig.sh
+  rm /tmp/pci_3.2.yaml
+  rm /tmp/config.sed
+} || {
+  printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
+  exit 1
+}
+printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
