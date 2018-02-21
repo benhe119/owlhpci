@@ -34,6 +34,16 @@ then
 fi
 printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
 
+printf '%-50s' "** Download PCI-DSS mapping file"
+response=$( curl --write-out "%{http_code}\n" -so /tmp/pci_3.2.yaml "https://raw.githubusercontent.com/owlh/wazuhenrichment/master/pci_3.2.yaml")
+if [[ ! $response == 200 ]] 
+then
+  printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
+  echo "Error downloading PCI-DSS mapping-> $response"
+  exit 1
+fi
+printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
+
 printf '%-50s' "** checking if 01-wazuh.conf file is in place"
 if [ ! -f /etc/logstash/conf.d/01-wazuh.conf ]; then
     printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
