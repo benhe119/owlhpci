@@ -76,7 +76,7 @@ fi
 
 printf '%-50s' "** Copy PCI-DSS mapping file to config folder"
 {
-  cp /tmp/pci.3.2.yaml /etc/logstash/config/.
+  cp /tmp/pci_3.2.yaml /etc/logstash/config/.
 } || {
   printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
   exit 1
