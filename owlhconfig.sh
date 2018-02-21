@@ -62,6 +62,27 @@ printf '%-50s' "** backup 01-wazuh.conf to 01-wazuh.conf.old"
 }
 printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
 
+
+if [ ! -d "/etc/logstash/config/" ]; then
+  printf '%-50s' "** folder /etc/logstash/config doesn't exists, creating..."
+  {
+    mkdir /etc/logstash/config/
+  } || {
+    printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
+    exit 1
+  }
+  printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
+fi
+
+printf '%-50s' "** Copy PCI-DSS mapping file to config folder"
+{
+  cp /tmp/PCI_DSS.3.2.yaml /etc/logstash/config/.
+} || {
+  printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
+  exit 1
+}
+printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
+
 printf '%-50s' "** configuring 01-wazuh.conf"
 {
   sed -i -f config.sed /etc/logstash/conf.d/01-wazuh.conf &> /dev/null
