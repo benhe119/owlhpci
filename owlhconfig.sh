@@ -24,6 +24,15 @@ then
     exit 1
 fi
 
+printf '%-50s' "** Download template configuration file"
+{
+  curl -so /tmp/config.sed https://raw.githubusercontent.com/owlh/wazuhenrichment/master/config.sedd &> /dev/null
+} || {
+  printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
+  exit 1
+}
+printf '%s%*s%s\n' "$GREEN" $col "[OK]" "$NORMAL"
+
 printf '%-50s' "** checking if 01-wazuh.conf file is in place"
 if [ ! -f /etc/logstash/conf.d/01-wazuh.conf ]; then
     printf '%s%*s%s\n' "$RED" $col "[ERROR]" "$NORMAL"
