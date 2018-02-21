@@ -10,5 +10,5 @@ download configuration script
 and then run it
 
 ```
-  /tmp/owlhconfig.sh
+  bash /tmp/owlhconfig.sh
 ```
