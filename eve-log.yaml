@@ -1,4 +1,5 @@
-- eve-log:
+outputs:
+  - eve-log:
     enabled: yes
     filetype: regular #regular|syslog|unix_dgram|unix_stream|redis
     filename: eve.json
