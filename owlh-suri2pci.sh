@@ -5,6 +5,8 @@
 # pci map management. append, modify or delete default map entries.
 # main pci-map file : https://raw.githubusercontent.com/owlh/wazuhenrichment/master/pci_3.2.yaml
 
+# NOTE: Sed command is ready for MAC OSx modify comments to allow Sed in other environments.
+
 # TODOs
 # append an existing SID - alert and abort
 # Modify just one control in an existing SID: add or remove
@@ -127,6 +129,7 @@ append () {
 delete () {
     echo delete $SID from map  $MAPFILE
     if vals; then
+#      sed -i /$SID/d $MAPFILE
       sed -i '' /$SID/d $MAPFILE
     fi
 }
