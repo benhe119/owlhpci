@@ -38,9 +38,15 @@ vals () {
 }
 
 printhelp () {
-    echo "usage: com -a|l|m|d -s sid -c pci-controls -b bulk_file  pci_map_file"
-    echo "      -a|--append - append sid and pci-dss related controls to map file"
-    echo "      -d|--delete - sid and pci-dss related controls from map file"
+    echo "usage: com -a|ls|lc|m|d -s sid -c pci-controls -b bulk_file  pci_map_file"
+    echo ""
+    echo "      -a|--append       - append sid and pci-dss related controls to map file"
+    echo "      -d|--delete       - sid and pci-dss related controls from map file"
+    echo "      -ls|--listsid     - list pci controlers related with a sid or group of sids (grep)"
+    echo "      -lc|--listctrl    - list sids that are associated with pci control"
+    echo "      -m|--modify       - modify sid and pci mapping"
+    echo "      -s|--sid          - sid number "
+    echo "      -c|--control      - list of controls comma separated"
 }
 
 printsid () {
