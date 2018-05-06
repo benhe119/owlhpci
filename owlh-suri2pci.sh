@@ -17,10 +17,7 @@
 
 valc () {
     check="^[0-9.,]+$";
-    if [[ $PCICONTROL =~ $check ]];then 
-        echo PCICONTROL $PCICONTROL match;
-    else
-        echo PCICONTROL $PCICONTROL error; 
+    if ! [[ $PCICONTROL =~ $check ]];then 
         return 1
     fi
 }
@@ -28,11 +25,7 @@ valc () {
 
 vals () {
     check="^[0-9]+$";
-    if [[ $SID =~ $check ]];then 
-        echo SID $SID match;
-        return 0
-    else
-        echo SID $SID error; 
+    if ! [[ $SID =~ $check ]];then 
         return 1
     fi
 }
@@ -79,7 +72,6 @@ case $key in
       printhelp
       exit
     fi
-
     shift # past argument
     shift # past value
     ;;
@@ -127,10 +119,7 @@ esac
 done
 
 append () {
-    echo append $SID, with controls $PCICONTROL to $MAPFILE
-    echo cheking... 
     if vals && valc; then
-       echo lets append it
        printsid
        printcontrols
        echo $SIDCHAIN\: $CTRLCHAIN 
@@ -139,7 +128,6 @@ append () {
 }
 
 delete () {
-    echo delete $SID from map  $MAPFILE
     if vals; then
 #      sed -i /$SID/d $MAPFILE
       sed -i '' /$SID/d $MAPFILE
@@ -147,7 +135,6 @@ delete () {
 }
 
 modify () {
-    echo modify $SID, with controls $PCICONTROL to $MAPFILE
     delete
     append
 }
@@ -155,11 +142,9 @@ modify () {
 list () {
     case $ACTIONTYPE in
       LISTSID)    
-        echo list $SID, from $MAPFILE
         grep $SID $MAPFILE 
       ;;
       LISTCTRL)    
-        echo list $PCICONTROL, from $MAPFILE
         grep $PCICONTROL $MAPFILE 
       ;;
     esac
