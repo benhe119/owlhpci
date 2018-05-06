@@ -92,8 +92,14 @@ case $key in
     ACTION=APPEND
     shift # past argument
     ;;
-    -l|--list)
+    -ls|--listsid)
     ACTION=LIST
+    ACTIONTYPE=LISTSID
+    shift # past argument
+    ;;
+    -lc|--listctrl)
+    ACTION=LIST
+    ACTIONTYPE=LISTCTRL
     shift # past argument
     ;;
     -d|--delete)
@@ -147,8 +153,16 @@ modify () {
 }
 
 list () {
-    echo list $SID, from $MAPFILE
-    grep $SID $MAPFILE 
+    case $ACTIONTYPE in
+      LISTSID)    
+        echo list $SID, from $MAPFILE
+        grep $SID $MAPFILE 
+      ;;
+      LISTCTRL)    
+        echo list $PCICONTROL, from $MAPFILE
+        grep $PCICONTROL $MAPFILE 
+      ;;
+    esac
 }
 
 case $ACTION in
