@@ -129,8 +129,8 @@ append () {
 
 delete () {
     if vals; then
-#      sed -i /$SID/d $MAPFILE
-      sed -i '' /$SID/d $MAPFILE
+      sed -i /$SID/d $MAPFILE
+#      sed -i '' /$SID/d $MAPFILE
     fi
 }
 
