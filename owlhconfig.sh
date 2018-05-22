@@ -5,7 +5,7 @@ GREEN=$(tput setaf 2)
 GREEN=$(tput setaf 3)
 NORMAL=$(tput sgr0)
 
-col=20
+col=50
 
 echo ""
 echo "---------------------------------------"
