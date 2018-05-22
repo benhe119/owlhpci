@@ -1,4 +1,4 @@
-# OwlH integration with wazuh 
+# OwlH - PCI Feed - Wazuh Enritchment 
 - Suricata events enrichment
 
 This must be run in every Wazuh logstash server. It will: 
